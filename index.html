@@ -9,11 +9,19 @@
 </head>
 
 <body>
-  <h1 class="card">
+  <div class="card">
     <p id="firstName"></p>
     <p id="lastName"></p>
     <p id="age"></p>
-  </h1>
+  </div>
+  <div>
+    <span>设置姓名</span>
+    <input type="text" oninput="user.name = this.value">
+  </div>
+  <div>
+    <span>设置生日</span>
+    <input type="date" oninput="user.birth = this.value">
+  </div>
   <script src='./vue.js'></script>
   <script src='./index.js'></script>
 </body>

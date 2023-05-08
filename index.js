@@ -3,6 +3,8 @@ const user = {
   birth: '1990-01-01',
 }
 
+observe(user)
+
 function showFirstName() {
   document.querySelector('#firstName').textContent = `姓：${user.name[0]}`
 }
@@ -14,30 +16,12 @@ function showAge() {
   const today = new Date()
   today.setHours(0, 0, 0, 0)
   const age = today.getFullYear() - birthday.getFullYear()
-  document.querySelector('#age').textContent = `年龄：${age}`
+  document.querySelector('#age').textContent = `年龄：${age} 岁`
 }
 
-let cacheName = user.name
-Object.defineProperty(user, 'name', {
-  get: function () {
-    return cacheName
-  },
-  set: function (value) {
-    cacheName = value
-    showFirstName()
-    showLastName()
-  }
-})
-let cacheBirth = user.birth
-Object.defineProperty(user, 'birth', {
-  get: function () {
-    return cacheBirth
-  },
-  set: function (value) {
-    cacheBirth = value
-    showAge()
-  }
-})
+call(showFirstName)
+call(showLastName)
+call(showAge)
 
 user.name = '李四'
 user.birth = '2000-01-01'
