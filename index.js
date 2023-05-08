@@ -7,7 +7,7 @@ function showFirstName() {
   document.querySelector('#firstName').textContent = `姓：${user.name[0]}`
 }
 function showLastName() {
-  document.querySelector('#lastName').textContent = `名：${user.name[1]}`
+  document.querySelector('#lastName').textContent = `名：${user.name.slice(1)}`
 }
 function showAge() {
   const birthday = new Date(user.birth)
@@ -17,6 +17,27 @@ function showAge() {
   document.querySelector('#age').textContent = `年龄：${age}`
 }
 
-showFirstName()
-showLastName()
-showAge()
+let cacheName = user.name
+Object.defineProperty(user, 'name', {
+  get: function () {
+    return cacheName
+  },
+  set: function (value) {
+    cacheName = value
+    showFirstName()
+    showLastName()
+  }
+})
+let cacheBirth = user.birth
+Object.defineProperty(user, 'birth', {
+  get: function () {
+    return cacheBirth
+  },
+  set: function (value) {
+    cacheBirth = value
+    showAge()
+  }
+})
+
+user.name = '李四'
+user.birth = '2000-01-01'
